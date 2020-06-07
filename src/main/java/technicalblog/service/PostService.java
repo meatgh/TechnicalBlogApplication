@@ -39,10 +39,11 @@ public class PostService {
 //        posts.add(post2);
 //        posts.add(post3);
 
+        Connection connection=null;
         try{
             Class.forName("org.postgresql.Driver");
 
-            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/technicalblog","postgres", "myself");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/technicalblog","postgres", "myself");
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM thirdtime");
             while(rs.next()){
@@ -53,6 +54,12 @@ public class PostService {
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        }finally{
+            try{
+                connection.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
         }
 
         return posts;
@@ -61,11 +68,33 @@ public class PostService {
     public ArrayList<Post> getOnePost() {
         ArrayList<Post> posts = new ArrayList<>();
 
-        Post post1 = new Post();
-        post1.setTitle("This is your Post");
-        post1.setBody("This is your Post. It has some valid content");
-        post1.setDate(new Date());
-        posts.add(post1);
+//        Post post1 = new Post();
+//        post1.setTitle("This is your Post");
+//        post1.setBody("This is your Post. It has some valid content");
+//        post1.setDate(new Date());
+//        posts.add(post1);
+        Connection connection=null;
+        try{
+            Class.forName("org.postgresql.Driver");
+
+             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/technicalblog","postgres", "myself");
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM thirdtime WHERE ID=4");
+            while(rs.next()){
+                Post post = new Post();
+                post.setTitle(rs.getString("title"));
+                post.setBody(rs.getString("body"));
+                posts.add(post);
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }finally{
+            try{
+                connection.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
 
         return posts;
 
