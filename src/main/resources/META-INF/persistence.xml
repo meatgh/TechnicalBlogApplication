@@ -18,6 +18,10 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect" />
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value=""/>
 
+            <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- updates, and creates if there's no table -->
+            <property name="hibernate.show_sql" value="true"/> <!-- Shows the sql query bering run, in the console -->
+            <property name="hibernate.format_sql" value="true"/> <!-- shows us the sql in the formatted style -->
+
 
         </properties>
 
