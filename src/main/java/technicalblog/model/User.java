@@ -8,10 +8,10 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name= "id")
     private Integer id;
 
-    @Column(name = "username")
+    @Column(name = "name")
     private String username;
 
     @Column(name = "password")
@@ -21,6 +21,13 @@ public class User {
     @JoinColumn(name = "profile_id")
     private UserProfile profile;
 
+    public UserProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfile profile) {
+        this.profile = profile;
+    }
 
     public Integer getId() {
         return id;
@@ -45,4 +52,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
