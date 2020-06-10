@@ -1,6 +1,8 @@
 package technicalblog.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -52,5 +54,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Post> posts = new ArrayList<>();
 
 }
